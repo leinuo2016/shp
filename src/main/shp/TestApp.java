@@ -37,10 +37,7 @@ import java.util.Map;
  */
 public class TestApp {
     public static void main(String[] args) throws IOException {
-        String shapeFile =  "/home/leinuo/gitee/shape6/src/main/resources/shp/xining/3jiliuyu.shp";
-        String dbfFile =  "/home/leinuo/gitee/shape6/src/main/resources/shp/xining/3jiliuyu.dbf";
-        String newFile =  "/home/leinuo/gitee/shape6/src/main/resources/shp/xining/5jiliuyu.shp";
-        String newFile1 =  "/home/leinuo/gitee/shape6/src/main/resources/shp/xining/3jiliuyu.shp";
+        String shapeFile =  "*.shp";
         testRead(shapeFile);
         //getShpFileAttributes(file);
         //readShape(shapeFile);
