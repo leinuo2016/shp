@@ -3,6 +3,7 @@ package shp;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.vividsolutions.jts.geom.*;
+import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 import org.geotools.data.*;
 import org.geotools.data.shapefile.ShapefileDataStore;
@@ -36,9 +37,10 @@ import java.util.Map;
  * qq:1321404703 https://github.com/leinuo2016
  */
 public class TestApp {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String shapeFile =  "*.shp";
-        testRead(shapeFile);
+        //testRead(shapeFile);
+        System.out.println(intersectsGeo());//GEOMETRYCOLLECTION ,单线，多线
         //getShpFileAttributes(file);
         //readShape(shapeFile);
         //readDBF(dbfFile);
@@ -46,6 +48,29 @@ public class TestApp {
         //transShape(shapeFile,newFile1);
         //testRead1(newFile1);
     }
+    /**
+     * 至少一个公共点(相交)
+     * @return
+     * @throws ParseException
+     */
+    public static boolean intersectsGeo() throws ParseException {
+        GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(PrecisionModel.FLOATING_SINGLE));
+        WKTReader reader = new WKTReader( geometryFactory );
+        //LineString geometry1 = (LineString) reader.read("LINESTRING(0 0, 2 0, 5 0)");
+        /*Polygon geometry1 = (Polygon) reader.read("POLYGON((0 0, 2 1, 2 3, 3 4, 5 0, 0 0))");
+        LineString geometry2 = (LineString) reader.read("LINESTRING(0 0, 6 6, 3 1, 5 0)");*/
+
+        Polygon geometry1 = (Polygon) reader.read("POLYGON((1 2, 7 1, 4 3, 3 7, 1 2))");
+        LineString geometry2 = (LineString) reader.read("LINESTRING(1 2, 2 6, 5 4, 3 1, 1 4)");
+        //LineString geometry2 = (LineString) reader.read("LINESTRING(1 2, 0 6, 2 1)");
+        //LineString geometry2 = (LineString) reader.read("LINESTRING(2 7, 7 0)");
+        //相交点
+        Geometry interPoint = geometry1.intersection(geometry2);
+        //输出 POINT (0 0)
+        System.out.println(interPoint.toText());
+        return geometry1.intersects(geometry2);
+    }
+
 
     public static void readShape(String file) {
         try {
