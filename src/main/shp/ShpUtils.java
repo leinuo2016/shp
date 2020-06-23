@@ -8,8 +8,4 @@ package shp;
 public class ShpUtils {
 
 
-
-    public static void main(String[] args) {
-
-    }
 }
