@@ -16,9 +16,28 @@ public class GeometryRelated {
      */
     public boolean equalsGeo() throws ParseException {
         WKTReader reader = new WKTReader(geometryFactory);
-        LineString geometry1 = (LineString) reader.read("LINESTRING(0 0, 2 0, 5 0)");
-        LineString geometry2 = (LineString) reader.read("LINESTRING(5 0, 0 0)");
+        LineString geometry1 = (LineString) reader.read("LINESTRING(0.1232545 0.2625478, 2.33434344 0.1258464, 5.12458774 0.124515)");
+        //LineString geometry2 = (LineString) reader.read("LINESTRING(5 0, 0 0)");
+        Point geometry2 = (Point) reader.read("POINT(0.1232545 0.2625478)");
         return geometry1.equals(geometry2);//true
+    }
+
+
+    /**
+     * 两个几何对象是否是重叠的
+     *
+     * @return
+     * @throws ParseException
+     */
+    public boolean equalsGeo1() throws ParseException {
+        WKTReader reader = new WKTReader(geometryFactory);
+        //LineString geometry1 = (LineString) reader.read("LINESTRING(0.1232545 0.2625478, 2.33434344 0.1258464, 5.12458774 0.124515)");
+        //LineString geometry2 = (LineString) reader.read("LINESTRING(5 0, 0 0)");
+        //Point geometry2 = (Point) reader.read("POINT(0.1232545 0.2625478)");
+
+        LineString geometry1 = (LineString) reader.read("LINESTRING(0 0, 2 0, 5 0)");
+        Point geometry2 = (Point) reader.read("POINT(5 0)");
+        return geometry2.equals(geometry1);//true
     }
 
     /**
@@ -71,9 +90,9 @@ public class GeometryRelated {
      */
     public static void main(String[] args) throws ParseException {
         GeometryRelated gr = new GeometryRelated();
-        System.out.println(gr.equalsGeo());
-        System.out.println(gr.disjointGeo());
-        System.out.println(gr.intersectsGeo());
-        System.out.println(gr.withinGeo(5, 5, "POLYGON((0 0, 10 0, 10 10, 0 10,0 0))"));
+        System.out.println(gr.equalsGeo1());
+       // System.out.println(gr.disjointGeo());
+        //System.out.println(gr.intersectsGeo());
+        //System.out.println(gr.withinGeo(5, 5, "POLYGON((0 0, 10 0, 10 10, 0 10,0 0))"));
     }
 }

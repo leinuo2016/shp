@@ -1,5 +1,6 @@
 package shp;
 
+import cn.hutool.core.io.file.FileReader;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -41,68 +42,112 @@ public class App {
 
     public static void main(String[] args) throws IOException, SchemaException, ParseException {
         //GeometryToFeature();
-        featureToGeometry();
+        //featureToGeometry();
         //GeometryToGeoJson();
-        Map<String,List<String>> map;
-        String waterCommUrl =  "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/waterResource/";
-        String regionCommUrl =  "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/region/";
-        ///home/leinuo/gitHub/shp/src/main/resource/shpfiles/region/青海市界（最终修正后）.shp
-        //intersectsGeo1();
-        List<String> fileUrls = new ArrayList<>();
-        fileUrls.add("青海省界（最终修正后）.shp");
-        //fileUrls.add("青海市界（最终修正后）.shp");
-        //fileUrls.add("青海县界（最终修正后）.shp");
-        //fileUrls.add("青海乡镇界（最终修正后）.shp");
-        for(String url:fileUrls){
-            System.out.println("---------------------"+url+"----------------------");
-       //     testReadAttribute(regionCommUrl+url,"utf-8");
-            //testRead(commUrl+url);
-        }
-        fileUrls.clear();
-        System.out.println("-------------------------------------------");
-        System.out.println("-------------------------------------------");
-        System.out.println("-------------------------------------------");
-        fileUrls.add("T2级.shp");
-        fileUrls.add("T2级流域面.shp");
-        fileUrls.add("T3级大.shp");
-        fileUrls.add("T3级大流域面.shp");
-        fileUrls.add("T3级大流域起点.shp");
-        fileUrls.add("T3级小流域.shp");
-        fileUrls.add("T3级小流域面.shp");
+        readWaterPlace();
+        //readWaterFunction();
+       //readDelimitation();
+       //readRegionPint();
+       //readRegion();
+       //readWaterResource();
+       //readWaterResource1();
 
-        fileUrls.add("T4级大.shp");
-        fileUrls.add("T4级大流域面.shp");
-        fileUrls.add("T4级小流域.shp");
-        fileUrls.add("T4级小流域面.shp");
+    }
 
-        fileUrls.add("T4级小流域起点.shp");
-        fileUrls.add("T4级小流域终点.shp");
-        fileUrls.add("T4级小流域起点高程.shp");
-        fileUrls.add("T4级小流域终点高程.shp");
+    public static void readWaterPlace() throws IOException {
 
-        fileUrls.add("T5级大.shp");
-        fileUrls.add("T5级大流域面.shp");
-        fileUrls.add("T5级小流域.shp");
-        fileUrls.add("T5级小流域面.shp");
+        String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/waterPlace/水源地基础数据.shp";
 
-        fileUrls.add("T6级.shp");
-        fileUrls.add("T6级流域面.shp");
+        String url1 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/waterPlace/水源地管护范围.shp";
 
-        fileUrls.add("T7级.shp");
-        fileUrls.add("T7级流域面.shp");
-
-        //testRead(waterCommUrl+"T2级.shp");
-
-        //T4级大
-        for(String url:fileUrls){
-            System.out.println("---------------------"+url+"----------------------");
-            //testReadAttribute(waterCommUrl+url,"UTF-8");
-            //testRead(waterCommUrl+url);
-        }
+        testReadAttribute(url);
+        System.out.println("------------------------------------------");
+        testReadAttribute(url1);
+    }
 
 
+    public static void readWaterFunction() throws IOException {
+
+        String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/waterFunction/一级水功能区.shp";
+
+        String url1 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/waterFunction/二级水功能区.shp";
+
+        testReadAttribute(url);
+        System.out.println("------------------------------------------");
+        testReadAttribute(url1);
+    }
+
+    //管理
+    public static void readDelimitation() throws IOException {
+        String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/water/湟中区管理范围线.shp";
+
+        testReadAttribute(url);
+
+    }
+
+    public static void readRegionPint() throws IOException {
+      //  String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/regionPoint/青海省县级点.shp";
+      //  String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/regionPoint/青海省地级市州点.shp";
+        String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/regionPoint/青海省乡镇点.shp";
+      //  String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/regionPoint/青海省县级点.shp";
+      //  String url = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/regionPoint/青海省行政村点.shp";
+
+        testReadAttribute(url);
+    }
 
 
+    public static void readRegion() throws IOException {
+        String url4 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/region/青海省省界.shp";
+        String url1 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/region/青海省市州界.shp";
+        String url2 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/region/青海省县区界.shp";
+        String url3 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/region/青海省乡镇界.shp";
+
+        testReadAttribute(url4);
+        testReadAttribute(url1);
+        testReadAttribute(url2);
+        testReadAttribute(url3);
+
+        System.out.println("------------------------------------------");
+       // testRead(url1);
+//        testRead(url2);
+//        testRead(url3);
+    }
+
+
+    public static void readWaterResource() throws IOException {
+        //[[id, code, name, level, unit, remark, tBasinArea, cBasinArea, tLength, cLength, aSlope, cSlope, mAFlow, mRunoff, rRegion, nLeftBank, nRightBank]]
+        //[[id, code, name, level, unit, remark, tBasinArea, cBasinArea, tLength, cLength, aSlope, cSlope, mAFlow, mRunoff, rRegion, nLeftBank, nRightBank]]
+        String url1 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/河流中心线.shp";
+        //[[code, name, remark, tShoreline, province, cityState, counties, towns, village, id]]
+        String url2 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/河流岸线.shp";
+        //[[FID_1, id, code, name]]
+        String url3 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/流域面.shp";
+        //[[name, remark, tShoreline, province, cityState, counties, towns, village, id, code]]
+        String url4 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/管护范围线.shp";
+        testReadAttribute(url1);
+        testReadAttribute(url2);
+        testReadAttribute(url3);
+        testReadAttribute(url4);
+        System.out.println("------------------------------------------");
+        testRead(url1);
+        testRead(url2);
+        testRead(url3);
+        testRead(url4);
+    }
+
+    public static void readWaterResource1() throws IOException {
+
+        //[[id, code, name, level, unit, remark, tBasinArea, cBasinArea, basinLevel, tLength, cLength, aSlope, cSlope, mAFlow, mRunoff, rRegion, nLeftBank, nRightBank]]
+        String url1 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/湟水河流域水系.shp";
+        //[[id, code, name]]
+        String url2 = "/home/leinuo/gitHub/shp/src/main/resource/shpfiles/datacenter/湟水河流域流域面.shp";
+
+        testReadAttribute(url1);
+        testReadAttribute(url2);
+
+        System.out.println("------------------------------------------");
+        testRead(url1);
+        testRead(url2);
 
     }
 
@@ -284,17 +329,22 @@ public class App {
         File shapeFile = new File(file);
         ShapefileDataStore store = new ShapefileDataStore(shapeFile.toURI().toURL());
         //设置编码
-        Charset charset = Charset.forName("utf-8");
+        File cpgFile = new File(file.replace(".shp",".cpg"));
+        String charSet = new FileReader(cpgFile).readString();
+        Charset charset = Charset.forName(charSet);
         store.setCharset(charset);
         SimpleFeatureSource sfSource = store.getFeatureSource();
         SimpleFeatureIterator sfIter = sfSource.getFeatures().features();
         // 从ShapeFile文件中遍历每一个Feature，然后将Feature转为GeoJSON字符串
         String str = "";
+        List<Object> list1;
         while (sfIter.hasNext()) {
             SimpleFeature feature = sfIter.next();
-            str  = feature.getAttributes().get(0).toString();
+            //str  = feature.getAttributes().get(0).toString();
             //list.add(str);
-            System.out.println(str.substring(0,str.indexOf(")")));
+            //System.out.println(str.substring(0,str.indexOf(")")));
+            list1 = feature.getAttributes();
+            System.out.println(list1.toString());
         }
         sfIter.close();
         store.dispose();//使用之后必须关掉
@@ -327,12 +377,14 @@ public class App {
     }
 
 
-    public static Map<String,List<String>> testReadAttribute(String file,String charSet) throws IOException {
+    public static Map<String,List<String>> testReadAttribute(String file) throws IOException {
         Map<String,List<String>> map = new HashMap<>();
         // 使用GeoTools读取ShapeFile文件
         File shapeFile = new File(file);
         ShapefileDataStore store = new ShapefileDataStore(shapeFile.toURI().toURL());
         //设置编码
+        File cpgFile = new File(file.replace(".shp",".cpg"));
+        String charSet = new FileReader(cpgFile).readString();
         Charset charset = Charset.forName(charSet);
         store.setCharset(charset);
         SimpleFeatureSource sfSource = store.getFeatureSource();
@@ -358,8 +410,10 @@ public class App {
         String str = "";
         while (sfIter.hasNext()) {
             SimpleFeature feature = sfIter.next();
-            String name1 = feature.getAttributes().get(2).toString();
-            List<Object> list = feature.getAttributes().subList(1,feature.getAttributes().size()-1);
+           // String name1 = feature.getAttributes().get(2).toString();
+           //K/E
+            // List<Object> list = feature.getAttributes().subList(1,feature.getAttributes().size()-1);
+            List<Object> list = feature.getAttributes().subList(1,feature.getAttributes().size());
             System.out.println(list);
             strings.add(str);
         }
@@ -462,9 +516,6 @@ public class App {
         final SimpleFeatureType TYPE2 = DataUtilities.createType("Link",
                 "geometry:LineString," +"name:String," +"number:Integer"// a number attribute
         );
-
-
-
         SimpleFeatureBuilder featureBuilder = new SimpleFeatureBuilder(TYPE1);
         GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory();
         WKTReader reader = new WKTReader( geometryFactory );

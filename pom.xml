@@ -40,6 +40,12 @@
       <version>1.2.68</version>
     </dependency>
 
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.4.6</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/si.uom/si-units-java8 -->
     <!--<dependency>
       <groupId>si.uom</groupId>

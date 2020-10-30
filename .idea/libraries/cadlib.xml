@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="cadlib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/main/resource/cadlib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/main/resource/cadlib" recursive="false" />
+  </library>
+</component>
